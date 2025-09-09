@@ -1,18 +1,43 @@
-export default function TVseries() {
-    return (
-        <div className="p-10">
-            <h1 className="text-center text-3xl p-5">TV Series</h1>
-            <div className="pt-10 pb-10">
-                <input className="text-white bg-gray-500 rounded-3xl p-1 pl-5 pr-5" type="text" />
-                <button className="bg-red-500 rounded-3xl p-1 pl-5 pr-5 cursor-pointer">Search</button>
-            </div>
+"use client"
+import { useQuery } from "@tanstack/react-query";
+import { getTopMovie, getTopTV, getTrendingMovie, getTrendingTV } from "@/services/api";
+import CardMovie from "@/components/CardMovie";
+import Search from "@/components/Search";
 
-            <div className="flex justify-center">
-                <button className="cursor-pointer
-                bg-black hover:bg-white text-white hover:text-red-500 
-                border-2 border-white rounded-3xl p-1 pl-5 pr-5">
-                    Watch more
-                </button>
+export default function TVseries() {
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ["Movie"],
+        queryFn: async () => {
+            const [trendingMovie, topMovie, trendingTV, topTV] = await Promise.all([
+                getTrendingMovie(),
+                getTopMovie(),
+                getTrendingTV(),
+                getTopTV()
+            ]);
+            return { trendingMovie, topMovie, trendingTV, topTV };
+        }
+    });
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>Error!</div>;
+
+    return (
+        <div>
+            <div className="bg-gradient-to-b from-white to-[#181818] w-full -z-10 ">
+                <h1 className="text-center text-3xl p-15 pt-35">TV Series</h1>
+            </div>
+            <div className="pl-10 pr-10 pb-10">
+                <Search />
+                <div className="grid grid-cols-6 gap-6">
+                    {data?.topTV.results.map((n: any) =>
+                        <CardMovie key={n.id} data={n} />
+                    )}
+                </div>
+
+                <div className="flex justify-center">
+                    <button className="cursor-pointer  bg-black hover:bg-white text-white hover:text-red-500 border-2 border-white rounded-3xl p-1 pl-5 pr-5">
+                        Watch more
+                    </button>
+                </div>
             </div>
         </div >
     );
