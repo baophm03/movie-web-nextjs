@@ -2,9 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+
+    const navItems = [
+        { name: "Home", href: "/" },
+        { name: "Movies", href: "/movies" },
+        { name: "TV Series", href: "/tvseries" },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,20 +25,33 @@ export default function Header() {
     }, []);
 
     return (
-        <div className="fixed top-0 left-0 w-full z-50">
+        <div className="fixed top-0 left-0 w-full z-50 font-bold">
             <div
                 id="navbar"
-                className={`flex flex-row justify-between p-10 transition-colors duration-200 
+                className={`flex items-center justify-between pl-10 pr-10 pt-5 pb-5 transition-colors duration-200 
                 ${scrolled ? "bg-[#181818]" : "bg-transparent"}`}
             >
-                <Link className="text-3xl hover:text-red-500 cursor-pointer" href="/">theMovie</Link>
-                <div>
-                    <Link className="text-2xl p-4 hover:text-red-500 cursor-pointer" href="/" > Home </Link>
-                    <Link className="text-2xl p-4 hover:text-red-500 cursor-pointer" href="/movies" > Movies </Link>
-                    <Link className="text-2xl p-4 hover:text-red-500 cursor-pointer" href="/tvseries" > TV Series </Link>
+                <Link className="flex items-center gap-4 text-3xl hover:text-red-600 cursor-pointer" href="/">
+                    <Image
+                        src="/logo.png"
+                        alt="logo"
+                        width={50}
+                        height={50}
+                    />
+                    <h1>theMovies</h1>
+                </Link>
+                <div className="flex gap-8">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className={`${pathname === item.href ? "text-red-600 border-b-2" : "text-white"} hover:text-red-600 hover:border-b-2`}
+                        >
+                            {item.name}
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>
-
     );
 }
