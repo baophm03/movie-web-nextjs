@@ -11,13 +11,12 @@ export default function SliderCard({ data }: { data: any }) {
             spaceBetween={50}
             slidesPerView={6}
         >
-            {data.map((n: any) =>
+            {data?.map((n: any) =>
                 <SwiperSlide key={n.id}>
                     <CardMovie data={n} />
-                </SwiperSlide >
-            )
-            }
-        </Swiper >
+                </SwiperSlide>
+            )}
+        </Swiper>
     )
 }
 

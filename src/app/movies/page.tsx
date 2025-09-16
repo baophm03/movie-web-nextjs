@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getTopMovie, getTopTV, getTrendingMovie, getTrendingTV } from "@/services/api";
+import { getTrendingMovie } from "@/services/api";
 import CardMovie from "@/components/CardMovie";
 import Search from "@/components/Search";
 import Image from "next/image";
@@ -9,16 +9,9 @@ import Image from "next/image";
 export default function Movies() {
     const { data, isLoading, isError } = useQuery({
         queryKey: ["Movie"],
-        queryFn: async () => {
-            const [trendingMovie, topMovie, trendingTV, topTV] = await Promise.all([
-                getTrendingMovie(),
-                getTopMovie(),
-                getTrendingTV(),
-                getTopTV()
-            ]);
-            return { trendingMovie, topMovie, trendingTV, topTV };
-        }
+        queryFn: getTrendingMovie,
     });
+
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error!</div>;
 
@@ -31,7 +24,7 @@ export default function Movies() {
             <div className="pl-10 pr-10 pb-10">
                 <Search />
                 <div className="grid grid-cols-6 gap-6">
-                    {data?.topMovie.results.map((n: any) =>
+                    {data?.results.map((n: any) =>
                         <CardMovie key={n.id} data={n} />
                     )}
                 </div>

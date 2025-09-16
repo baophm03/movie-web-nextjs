@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 export default function CardMovie({ data }: { data: any }) {
     return (
-        <div className="group">
+        <Link href={`/${data.media_type}/${data.id}`}
+            className="group">
             <div className="relative rounded-xl overflow-hidden cursor-pointer">
                 <img
                     src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
@@ -22,6 +25,6 @@ export default function CardMovie({ data }: { data: any }) {
                 </button>
             </div>
             <div className='pt-5 group-hover:text-red-500'>{data.title || data.name}</div>
-        </div>
+        </Link>
     )
 }

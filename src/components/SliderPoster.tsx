@@ -20,14 +20,12 @@ export default function SliderPoster() {
     });
 
     if (isLoading) return <div>Loading...</div>;
-    console.log(data);
 
     return (
         <Swiper
             spaceBetween={50}
             slidesPerView={1}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+
         >
             {data?.topMovie.results.map((n: any) => (
                 <SwiperSlide key={n.id}>
@@ -53,7 +51,7 @@ export default function SliderPoster() {
                                 alt={n.title}
                                 width={250}
                                 height={100}
-                                className='rounded-2xl object-cover'
+                                className='rounded-2xl object-cover h-auto w-auto'
                             />
                         </div>
                     </div>

@@ -8,8 +8,8 @@ import SliderPoster from "@/components/SliderPoster";
 
 export default function Home() {
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ["Movie"],
+    const { data } = useQuery({
+        queryKey: ["Home"],
         queryFn: async () => {
             const [trendingMovie, topMovie, trendingTV, topTV] = await Promise.all([
                 getTrendingMovie(),
@@ -20,8 +20,6 @@ export default function Home() {
             return { trendingMovie, topMovie, trendingTV, topTV };
         }
     });
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error!</div>;
 
     return (
         <div >
@@ -36,7 +34,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.trendingMovie.results} />
+                    <SliderCard data={data?.trendingMovie?.results} />
                 </div>
 
                 {/* Top Rated Movies */}
@@ -47,7 +45,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.topMovie.results} />
+                    <SliderCard data={data?.topMovie?.results} />
                 </div>
 
                 {/* Trending TV */}
@@ -58,7 +56,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.trendingTV.results} />
+                    <SliderCard data={data?.trendingTV?.results} />
                 </div>
 
 
@@ -70,7 +68,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.topTV.results} />
+                    <SliderCard data={data?.topTV?.results} />
                 </div>
             </div >
         </div>
