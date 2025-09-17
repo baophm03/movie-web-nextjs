@@ -141,4 +141,4 @@ export default function MovieDetail({ movie }: { movie: { id: string; category: 
 
         </div >
     );
-}
+} 
