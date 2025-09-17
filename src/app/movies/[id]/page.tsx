@@ -1,7 +1,8 @@
 import MovieDetail from "@/components/MovieDetail";
 
-export default function MovieDetailPage({ params }: { params: { id: string } }) {
+export default async function MovieDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     return (
-        <MovieDetail movie={{ id: params.id, category: 'movie' }} />
+        <MovieDetail movie={{ id, category: 'movie' }} />
     );
 }

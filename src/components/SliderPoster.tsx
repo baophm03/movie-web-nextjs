@@ -6,6 +6,7 @@ import 'swiper/css';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { getTopMovie, getTopTV } from '@/services/api';
+import Link from 'next/link';
 
 export default function SliderPoster() {
     const { data } = useQuery({
@@ -34,13 +35,14 @@ export default function SliderPoster() {
                             width={1000}
                             height={100}
                             className='h-full w-full opacity-30'
+                            priority
                         />
                         <div className='absolute flex justify-center items-center gap-20'>
                             <div className='w-[40%]'>
                                 <h2 className='text-5xl font-bold'>{n.title}</h2>
                                 <p className='pt-10 pb-10 text-xl'>{n.overview}</p>
                                 <div className='flex gap-3'>
-                                    <button className='font-bold bg-red-600 cursor-pointer rounded-full py-3 px-6 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]'>Watch Now</button>
+                                    <Link href={`/movies/${n.id}`} className='font-bold bg-red-600 cursor-pointer rounded-full py-3 px-6 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]'>Watch Now</Link>
                                     <button className='font-bold border border-white rounded-full py-3 px-6 hover:text-red-600 hover:bg-white'>Watch Trailer</button>
                                 </div>
                             </div>
