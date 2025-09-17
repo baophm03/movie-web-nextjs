@@ -7,13 +7,10 @@ import Search from "@/components/Search";
 import Image from "next/image";
 
 export default function Movies() {
-    const { data, isLoading, isError } = useQuery({
+    const { data } = useQuery({
         queryKey: ["Movie"],
         queryFn: getTrendingMovie,
     });
-
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error!</div>;
 
     return (
         <div>

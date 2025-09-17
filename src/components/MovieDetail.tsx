@@ -3,39 +3,30 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import SliderCard from "./SliderCard";
-import { getTrendingMovie } from "@/services/api";
+import { getDetailMovie, getDetailMovieCredit, getDetailMovieGetVideo, getDetailMovieSimilar } from "@/services/api";
 
-export default function MovieDetail({ id }: { id: string }) {
-    const API_KEY = '4f85134e0e3de33d9af45eb9596b5735';
-    const BASE_URL = 'https://api.themoviedb.org/3';
+export default function MovieDetail({ movie }: { movie: { id: string; category: string } }) {
 
     const { data } = useQuery({
-        queryKey: ['movie', id],
-        queryFn: async () => {
-            const res = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
-            return res.json();
-        }
+        queryKey: [movie.id, movie.category],
+        queryFn: () => getDetailMovie(movie.category, movie.id),
     });
 
     const { data: credits } = useQuery({
-        queryKey: ['movie', id, 'credits'],
-        queryFn: async () => {
-            const res = await fetch(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`);
-            return res.json();
-        }
+        queryKey: [movie.id, movie.category, 'credits'],
+        queryFn: () => getDetailMovieCredit(movie.category, movie.id),
     });
 
     const { data: getVideos } = useQuery({
-        queryKey: ['movie', id, 'getVideos'],
-        queryFn: async () => {
-            const res = await fetch(`${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`);
-            return res.json();
-        }
+        queryKey: [movie.id, movie.category, 'getVideos'],
+        queryFn: () => getDetailMovieGetVideo(movie.category, movie.id),
+
     });
 
-    const { data: trendingMovies } = useQuery({
-        queryKey: ["Movie"],
-        queryFn: getTrendingMovie,
+    const { data: similar } = useQuery({
+        queryKey: [movie.category, movie.id, "similar"],
+        queryFn: () => getDetailMovieSimilar(movie.category, movie.id),
+
     });
 
     return (
@@ -144,7 +135,7 @@ export default function MovieDetail({ id }: { id: string }) {
             <div className="pr-10 pl-10 ">
                 <h3 className="text-base md:text-2xl">Similar</h3>
                 <div className="pt-5 pb-20">
-                    <SliderCard data={trendingMovies?.results} />
+                    <SliderCard data={similar?.results} category={movie.category} />
                 </div>
             </div>
 

@@ -5,12 +5,10 @@ import CardMovie from "@/components/CardMovie";
 import Search from "@/components/Search";
 
 export default function TVseries() {
-    const { data, isLoading, isError } = useQuery({
+    const { data } = useQuery({
         queryKey: ["TVSeries"],
         queryFn: getTrendingTV
     });
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error!</div>;
 
     return (
         <div>

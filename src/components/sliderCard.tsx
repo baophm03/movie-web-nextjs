@@ -5,7 +5,7 @@ import 'swiper/css';
 import Image from 'next/image';
 import CardMovie from './CardMovie';
 
-export default function SliderCard({ data }: { data: any }) {
+export default function SliderCard({ data, category }: { data: any, category?: string }) {
     return (
         <Swiper
             spaceBetween={50}
@@ -13,7 +13,7 @@ export default function SliderCard({ data }: { data: any }) {
         >
             {data?.map((n: any) =>
                 <SwiperSlide key={n.id}>
-                    <CardMovie data={n} />
+                    <CardMovie data={n} category={category} />
                 </SwiperSlide>
             )}
         </Swiper>

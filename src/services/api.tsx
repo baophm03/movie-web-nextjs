@@ -1,4 +1,5 @@
 'use client'
+
 const API_KEY = '4f85134e0e3de33d9af45eb9596b5735';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -48,4 +49,23 @@ export async function getTopTV() {
             media_type: 'tvseries',
         })),
     }
+};
+
+export async function getDetailMovie(category: string, id: string) {
+    const detailMovie = await fetch(`${BASE_URL}/${category}/${id}?api_key=${API_KEY}`);
+    return detailMovie.json();
+};
+export async function getDetailMovieCredit(category: string, id: string) {
+    const detailMovie = await fetch(`${BASE_URL}/${category}/${id}/credits?api_key=${API_KEY}`);
+    return detailMovie.json();
+};
+
+export async function getDetailMovieGetVideo(category: string, id: string) {
+    const detailMovie = await fetch(`${BASE_URL}/${category}/${id}/videos?api_key=${API_KEY}&language=en-US`);
+    return detailMovie.json();
+};
+
+export async function getDetailMovieSimilar(category: string, id: string) {
+    const detailMovie = await fetch(`${BASE_URL}/${category}/${id}/similar?api_key=${API_KEY}&language=en-US`);
+    return detailMovie.json();
 };

@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getTopMovie, getTopTV } from '@/services/api';
 
 export default function SliderPoster() {
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ['movies'],
         queryFn: async () => {
             const [topMovie, topTV] = await Promise.all([
@@ -18,8 +18,6 @@ export default function SliderPoster() {
             return { topTV, topMovie };
         }
     });
-
-    if (isLoading) return <div>Loading...</div>;
 
     return (
         <Swiper
