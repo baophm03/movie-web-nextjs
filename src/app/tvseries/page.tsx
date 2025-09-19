@@ -30,8 +30,6 @@ export default function TVseries() {
         setInput(query)
     }, [query])
 
-    console.log(data)
-
     return (
         <div>
             <div className="bg-gradient-to-b from-white to-[#181818] w-full -z-10 ">
