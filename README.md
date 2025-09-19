@@ -5,7 +5,7 @@ Web xem thông tin phim, xây dựng bằng Next.js, sử dụng dữ liệu t�
 Clone repo
 ```
 git clone https://github.com/baophm03/movie-web-nextjs
-cd movie-app
+cd movie-web-nextjs
 ```
 Install node_modules
 ```
