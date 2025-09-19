@@ -69,3 +69,8 @@ export async function getDetailMovieSimilar(category: string, id: string) {
     const detailMovie = await fetch(`${BASE_URL}/${category}/${id}/similar?api_key=${API_KEY}&language=en-US`);
     return detailMovie.json();
 };
+
+export async function getSearch(category: string, query: string) {
+    const data = await fetch(`${BASE_URL}/search/${category}?api_key=${API_KEY}&query=${query}`);
+    return data.json();
+}

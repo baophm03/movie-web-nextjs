@@ -1,14 +1,36 @@
 "use client"
 import { useQuery } from "@tanstack/react-query";
-import { getTrendingTV } from "@/services/api";
+import { getTrendingTV, getSearch } from "@/services/api";
 import CardMovie from "@/components/CardMovie";
-import Search from "@/components/Search";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function TVseries() {
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const query = searchParams.get("keyword") || "";
+
+    const [input, setInput] = useState(query)
+
     const { data } = useQuery({
-        queryKey: ["TVSeries"],
-        queryFn: getTrendingTV
+        queryKey: ["TVSeries", query],
+        queryFn: () => {
+            return query ? getSearch('tv', input) : getTrendingTV()
+        },
     });
+
+    const getAPI = async () => {
+        if (!input) return
+        router.push(`/tvseries?keyword=${encodeURIComponent(input)}`);
+    }
+
+    useEffect(() => {
+        setInput(query)
+    }, [query])
+
+    console.log(data)
 
     return (
         <div>
@@ -16,10 +38,25 @@ export default function TVseries() {
                 <h1 className="text-center text-3xl p-15 pt-35">TV Series</h1>
             </div>
             <div className="pl-10 pr-10 pb-10">
-                <Search />
+
+                <div className="relative pt-10 pb-10 w-[35%]">
+                    <input
+                        className="w-full text-white bg-black rounded-3xl p-2 pl-4"
+                        type="text"
+                        placeholder="Enter keyword"
+                        onChange={(e) => setInput(e.target.value)}
+                        value={input}
+                    />
+                    <button className="absolute right-0 top-1/2 -translate-y-1/2 bg-red-600 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]  rounded-3xl py-2 px-7 cursor-pointer"
+                        onClick={() => getAPI()}
+                    >
+                        Search
+                    </button>
+                </div>
+
                 <div className="grid grid-cols-6 gap-6">
                     {data?.results.map((n: any) =>
-                        <CardMovie key={n.id} data={n} />
+                        <CardMovie key={n.id} data={n} category="tvseries" />
                     )}
                 </div>
 
