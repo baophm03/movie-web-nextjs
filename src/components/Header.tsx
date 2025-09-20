@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import path from "path";
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
@@ -15,6 +16,7 @@ export default function Header() {
         { name: "TV Series", href: "/tvseries" },
     ];
 
+    // effect trong suốt
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 70);
@@ -42,15 +44,21 @@ export default function Header() {
                 </Link>
 
                 <div className="flex gap-8">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={`${pathname === item.href ? "text-red-600 border-b-2" : "text-white"} hover:text-red-600 hover:border-b-2`}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
+                    {navItems.map((item) => {
+                        const isActive =
+                            item.href === "/"
+                                ? pathname === item.href
+                                : pathname.startsWith(item.href);
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className={`${isActive ? "text-red-600 border-b-2" : "text-white"} hover:text-red-600 hover:border-b-2`}
+                            >
+                                {item.name}
+                            </Link>
+                        )
+                    })}
                 </div>
             </div>
         </div>
