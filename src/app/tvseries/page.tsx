@@ -18,12 +18,12 @@ export default function TVseries() {
     const [input, setInput] = useState(search)
 
     const { data } = useQuery({
-        queryKey: ["Movie", queryKey],
+        queryKey: ["TVseries", queryKey],
         queryFn: () => {
             if (queryKey == "") return getPopularTV();
             if (queryKey == "trending") return getTrendingTV();
             if (queryKey == "top_rated") return getTopTV();
-            return getSearch('movie', queryKey)
+            return getSearch('tvseries', queryKey)
         },
     });
 
