@@ -23,13 +23,13 @@ export default function TVseries() {
             if (queryKey == "") return getPopularTV();
             if (queryKey == "trending") return getTrendingTV();
             if (queryKey == "top_rated") return getTopTV();
-            return getSearch('tvseries', queryKey)
+            return getSearch('tv', queryKey)
         },
     });
 
     const getAPI = async () => {
         if (!input) return
-        router.push(`/movies?keyword=${encodeURIComponent(input)}`);
+        router.push(`/tvseries?keyword=${encodeURIComponent(input)}`);
     }
 
     useEffect(() => {
