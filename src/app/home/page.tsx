@@ -5,6 +5,7 @@ import { getTrendingMovie, getTopMovie, getTrendingTV, getTopTV } from "@/servic
 import SliderCard from "@/components/SliderCard";
 import Image from "next/image";
 import SliderPoster from "@/components/SliderPoster";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -30,7 +31,11 @@ export default function Home() {
                 <div>
                     <div className="flex flex-row justify-between pt-10 mb-10">
                         <h1 className="text-2xl">Trending Movies</h1>
-                        <button className="border border-white rounded-2xl pl-4 pr-4">View more</button>
+                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                            href={"/movies?type=trending"}
+                        >
+                            <p>View more</p>
+                        </Link>
                     </div>
 
                     {/* slider danh sach phim */}
@@ -41,7 +46,11 @@ export default function Home() {
                 <div>
                     <div className="flex flex-row justify-between pt-10 mb-10">
                         <h1 className="text-2xl">Top Rated Movies</h1>
-                        <button className="border border-white rounded-2xl pl-4 pr-4">View more</button>
+                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                            href={"/movies?type=top_rated"}
+                        >
+                            <p>View more</p>
+                        </Link>
                     </div>
 
                     {/* slider danh sach phim */}
@@ -52,7 +61,11 @@ export default function Home() {
                 <div>
                     <div className="flex flex-row justify-between pt-10 mb-10">
                         <h1 className="text-2xl">Trending TV</h1>
-                        <button className="border border-white rounded-2xl pl-4 pr-4">View more</button>
+                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                            href={"/tvseries?type=trending"}
+                        >
+                            <p>View more</p>
+                        </Link>
                     </div>
 
                     {/* slider danh sach phim */}
@@ -64,7 +77,11 @@ export default function Home() {
                 <div >
                     <div className="flex flex-row justify-between pt-10 mb-10">
                         <h1 className="text-2xl">Top Rated TV</h1>
-                        <button className="border border-white rounded-2xl pl-4 pr-4">View more</button>
+                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                            href={"/tvseries?type=top_rated"}
+                        >
+                            <p>View more</p>
+                        </Link>
                     </div>
 
                     {/* slider danh sach phim */}

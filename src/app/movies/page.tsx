@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getTrendingMovie, getSearch } from "@/services/api";
+import { getPopularMovie, getTrendingMovie, getTopMovie, getSearch } from "@/services/api";
 import CardMovie from "@/components/CardMovie";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,14 +11,20 @@ export default function Movies() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const query = searchParams.get("keyword") || "";
+    const search = searchParams.get("keyword") || "";
+    const type = searchParams.get("type") || "";
 
-    const [input, setInput] = useState(query)
+    const queryKey = search || type;
+
+    const [input, setInput] = useState(search)
 
     const { data } = useQuery({
-        queryKey: ["Movie", query],
+        queryKey: ["Movie", queryKey],
         queryFn: () => {
-            return query ? getSearch('movie', input) : getTrendingMovie()
+            if (queryKey == "") return getPopularMovie();
+            if (queryKey == "trending") return getTrendingMovie();
+            if (queryKey == "top_rated") return getTopMovie();
+            return getSearch('movie', queryKey)
         },
     });
 
@@ -28,8 +34,8 @@ export default function Movies() {
     }
 
     useEffect(() => {
-        setInput(query)
-    }, [query])
+        setInput(search)
+    }, [search])
 
     return (
         <div>
@@ -46,6 +52,7 @@ export default function Movies() {
                         placeholder="Enter keyword"
                         onChange={(e) => setInput(e.target.value)}
                         value={input}
+                        onKeyDown={(e) => { if (e.key == "Enter") getAPI() }}
                     />
                     <button className="absolute right-0 top-1/2 -translate-y-1/2 bg-red-600 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]  rounded-3xl py-2 px-7 cursor-pointer"
                         onClick={() => getAPI()}

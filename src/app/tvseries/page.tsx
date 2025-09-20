@@ -1,6 +1,6 @@
 "use client"
 import { useQuery } from "@tanstack/react-query";
-import { getTrendingTV, getSearch } from "@/services/api";
+import { getTrendingTV, getSearch, getPopularTV, getTopTV } from "@/services/api";
 import CardMovie from "@/components/CardMovie";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,25 +10,31 @@ export default function TVseries() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const query = searchParams.get("keyword") || "";
+    const search = searchParams.get("keyword") || "";
+    const type = searchParams.get("type") || "";
 
-    const [input, setInput] = useState(query)
+    const queryKey = search || type;
+
+    const [input, setInput] = useState(search)
 
     const { data } = useQuery({
-        queryKey: ["TVSeries", query],
+        queryKey: ["Movie", queryKey],
         queryFn: () => {
-            return query ? getSearch('tv', input) : getTrendingTV()
+            if (queryKey == "") return getPopularTV();
+            if (queryKey == "trending") return getTrendingTV();
+            if (queryKey == "top_rated") return getTopTV();
+            return getSearch('movie', queryKey)
         },
     });
 
     const getAPI = async () => {
         if (!input) return
-        router.push(`/tvseries?keyword=${encodeURIComponent(input)}`);
+        router.push(`/movies?keyword=${encodeURIComponent(input)}`);
     }
 
     useEffect(() => {
-        setInput(query)
-    }, [query])
+        setInput(search)
+    }, [search])
 
     return (
         <div>
@@ -44,6 +50,7 @@ export default function TVseries() {
                         placeholder="Enter keyword"
                         onChange={(e) => setInput(e.target.value)}
                         value={input}
+                        onKeyDown={(e) => { if (e.key == "Enter") getAPI() }}
                     />
                     <button className="absolute right-0 top-1/2 -translate-y-1/2 bg-red-600 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]  rounded-3xl py-2 px-7 cursor-pointer"
                         onClick={() => getAPI()}

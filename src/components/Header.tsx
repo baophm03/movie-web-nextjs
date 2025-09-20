@@ -40,6 +40,7 @@ export default function Header() {
                     />
                     <h1>theMovies</h1>
                 </Link>
+
                 <div className="flex gap-8">
                     {navItems.map((item) => (
                         <Link
