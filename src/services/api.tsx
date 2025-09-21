@@ -3,8 +3,8 @@
 const API_KEY = '4f85134e0e3de33d9af45eb9596b5735';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export async function getTrendingMovie() {
-    const res = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`);
+export async function getTrendingMovie(PageNumber: number) {
+    const res = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${PageNumber}&include_adult=false`);
     const data = await res.json();
     return {
         ...data,
@@ -15,8 +15,8 @@ export async function getTrendingMovie() {
     }
 };
 
-export async function getTopMovie() {
-    const topMovie = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
+export async function getTopMovie(PageNumber: number) {
+    const topMovie = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}&page=${PageNumber}&include_adult=false`);
     const data = await topMovie.json();
     return {
         ...data,
@@ -27,8 +27,8 @@ export async function getTopMovie() {
     }
 };
 
-export async function getPopularMovie() {
-    const popularMovie = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+export async function getPopularMovie(PageNumber: number) {
+    const popularMovie = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${PageNumber}&include_adult=false`);
     const data = await popularMovie.json();
     return {
         ...data,
@@ -39,8 +39,8 @@ export async function getPopularMovie() {
     }
 };
 
-export async function getTrendingTV() {
-    const trendingTV = await fetch(`${BASE_URL}/trending/tv/week?api_key=${API_KEY}`);
+export async function getTrendingTV(PageNumber: number) {
+    const trendingTV = await fetch(`${BASE_URL}/trending/tv/week?api_key=${API_KEY}&page=${PageNumber}&include_adult=false`);
     const data = await trendingTV.json();
     return {
         ...data,
@@ -51,8 +51,8 @@ export async function getTrendingTV() {
     }
 };
 
-export async function getTopTV() {
-    const topTV = await fetch(`${BASE_URL}/tv/top_rated?api_key=${API_KEY}`);
+export async function getTopTV(PageNumber: number) {
+    const topTV = await fetch(`${BASE_URL}/tv/top_rated?api_key=${API_KEY}&page=${PageNumber}&include_adult=false`);
     const data = await topTV.json();
     return {
         ...data,
@@ -63,8 +63,8 @@ export async function getTopTV() {
     }
 };
 
-export async function getPopularTV() {
-    const popularTV = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}`);
+export async function getPopularTV(PageNumber: number) {
+    const popularTV = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${PageNumber}&include_adult=false`);
     const data = await popularTV.json();
     return {
         ...data,
@@ -94,7 +94,7 @@ export async function getDetailMovieSimilar(category: string, id: string) {
     return detailMovie.json();
 };
 
-export async function getSearch(category: string, query: string) {
-    const data = await fetch(`${BASE_URL}/search/${category}?api_key=${API_KEY}&query=${query}`);
+export async function getSearch(category: string, query: string, PageNumber: number) {
+    const data = await fetch(`${BASE_URL}/search/${category}?api_key=${API_KEY}&query=${query}&page=${PageNumber}&include_adult=false`);
     return data.json();
 }

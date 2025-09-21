@@ -13,8 +13,8 @@ export default function SliderPoster() {
         queryKey: ['movies'],
         queryFn: async () => {
             const [topMovie, topTV] = await Promise.all([
-                getTopMovie(),
-                getTopTV()
+                getTopMovie(1),
+                getTopTV(1)
             ]);
             return { topTV, topMovie };
         }

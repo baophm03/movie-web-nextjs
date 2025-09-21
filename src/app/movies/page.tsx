@@ -1,10 +1,11 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getPopularMovie, getTrendingMovie, getTopMovie, getSearch } from "@/services/api";
 import CardMovie from "@/components/CardMovie";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import page from "../page";
 
 export default function Movies() {
 
@@ -13,20 +14,32 @@ export default function Movies() {
 
     const search = searchParams.get("keyword") || "";
     const type = searchParams.get("type") || "";
-
     const queryKey = search || type;
 
-    const [input, setInput] = useState(search)
+    const [input, setInput] = useState(search);
 
-    const { data } = useQuery({
+    const {
+        data,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+    } = useInfiniteQuery({
         queryKey: ["Movie", queryKey],
-        queryFn: () => {
-            if (queryKey == "") return getPopularMovie();
-            if (queryKey == "trending") return getTrendingMovie();
-            if (queryKey == "top_rated") return getTopMovie();
-            return getSearch('movie', queryKey)
+        initialPageParam: 1,
+        queryFn: ({ pageParam = 1 }) => {
+            if (queryKey === "") return getPopularMovie(pageParam);
+            if (queryKey === "trending") return getTrendingMovie(pageParam);
+            if (queryKey === "top_rated") return getTopMovie(pageParam);
+            return getSearch("movie", queryKey, pageParam);
+        },
+        getNextPageParam: (lastPage) => {
+            if (lastPage.page < lastPage.total_pages) {
+                return lastPage.page + 1;
+            }
+            return undefined;
         },
     });
+
 
     const getAPI = async () => {
         if (!input) return
@@ -60,16 +73,22 @@ export default function Movies() {
                         Search
                     </button>
                 </div>
-                <div className="grid grid-cols-6 gap-6">
-                    {data?.results.map((n: any) =>
-                        <CardMovie key={n.id} data={n} category="movie" />
+
+                <div className="grid grid-cols-6 gap-6 pb-10">
+                    {data?.pages.flatMap((page, pageIndex) =>
+                        page.results.map((movie: any) => (
+                            <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} category="movie" />
+                        ))
                     )}
                 </div>
 
                 <div className="flex justify-center">
-                    <button className="cursor-pointer  bg-black hover:bg-white text-white hover:text-red-500 border-2 border-white rounded-3xl p-1 pl-5 pr-5">
-                        Watch more
-                    </button>
+                    {hasNextPage && (
+                        <button className="cursor-pointer  bg-black hover:bg-white text-white hover:text-red-500 border-2 border-white rounded-3xl p-1 pl-5 pr-5"
+                            onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+                            {isFetchingNextPage ? "Loading..." : "Watch more"}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

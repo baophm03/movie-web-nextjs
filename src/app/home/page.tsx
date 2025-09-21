@@ -6,6 +6,7 @@ import SliderCard from "@/components/SliderCard";
 import Image from "next/image";
 import SliderPoster from "@/components/SliderPoster";
 import Link from "next/link";
+import page from "../page";
 
 export default function Home() {
 
@@ -13,10 +14,10 @@ export default function Home() {
         queryKey: ["Home"],
         queryFn: async () => {
             const [trendingMovie, topMovie, trendingTV, topTV] = await Promise.all([
-                getTrendingMovie(),
-                getTopMovie(),
-                getTrendingTV(),
-                getTopTV()
+                getTrendingMovie(1),
+                getTopMovie(1),
+                getTrendingTV(1),
+                getTopTV(1)
             ]);
             return { trendingMovie, topMovie, trendingTV, topTV };
         }
