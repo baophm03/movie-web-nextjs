@@ -35,7 +35,7 @@ export default function MovieDetail({ movie }: { movie: { id: string; category: 
                 style={{
                     backgroundImage: data
                         ? `url(https://image.tmdb.org/t/p/original/${data?.backdrop_path})`
-                        : undefined,
+                        : `url(/fallback.png)`,
                 }}
                 className="
                 relative bg-center bg-cover bg-no-repeat w-full   
@@ -53,7 +53,9 @@ export default function MovieDetail({ movie }: { movie: { id: string; category: 
                             width={500}
                             height={528}
                             className="object-cover rounded-4xl priority"
-                        />
+                            onError={(e) => {
+                                e.currentTarget.src = "/fallback.png";
+                            }} />
                     </div>
                     <div className="md:px-4 w-full -my-2">
                         <div className="py-4 w-full">
@@ -84,8 +86,11 @@ export default function MovieDetail({ movie }: { movie: { id: string; category: 
                                         <div className="w-28 px-2 relative px-2" key={item.id}>
                                             <div className="relative w-full   ">
                                                 <Image
-                                                    src={`https://image.tmdb.org/t/p/original/${item.profile_path}`}
-                                                    alt="card Image"
+                                                    src={
+                                                        item.profile_path
+                                                            ? `https://image.tmdb.org/t/p/original/${item.profile_path}`
+                                                            : "/fallback.png"
+                                                    } alt="card Image"
                                                     className="object-cover rounded-2xl"
                                                     width={96}
                                                     height={144}
