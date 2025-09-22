@@ -1,12 +1,11 @@
 "use client";
-// import Swiper JS
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import Swiper styles
 import 'swiper/css';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { getTopMovie, getTopTV } from '@/services/api';
 import Link from 'next/link';
+import { Autoplay } from "swiper/modules";
 
 export default function SliderPoster() {
     const { data } = useQuery({
@@ -22,9 +21,11 @@ export default function SliderPoster() {
 
     return (
         <Swiper
+            modules={[Autoplay]}
             spaceBetween={50}
             slidesPerView={1}
-
+            autoplay={{ delay: 5000 }}
+            loop={true}
         >
             {data?.topMovie.results.map((n: any) => (
                 <SwiperSlide key={n.id}>

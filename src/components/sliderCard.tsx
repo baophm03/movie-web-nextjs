@@ -2,14 +2,17 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import Swiper styles
 import 'swiper/css';
-import Image from 'next/image';
+import { Autoplay } from "swiper/modules";
 import CardMovie from './CardMovie';
 
 export default function SliderCard({ data, category }: { data: any, category?: string }) {
     return (
         <Swiper
+            modules={[Autoplay]}
             spaceBetween={50}
             slidesPerView={6}
+            autoplay={{ delay: 3000 }}
+            loop={true}
         >
             {data?.map((n: any) =>
                 <SwiperSlide key={n.id}>
