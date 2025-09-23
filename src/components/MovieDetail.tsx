@@ -5,27 +5,29 @@ import Image from "next/image";
 import SliderCard from "./SliderCard";
 import { getDetailMovie, getDetailMovieCredit, getDetailMovieGetVideo, getDetailMovieSimilar } from "@/services/api";
 
-export default function MovieDetail({ movie }: { movie: { id: string; category: string } }) {
+export default function MovieDetail({ movie }: { movie: { category: string; id: string } }) {
+
+    let category = movie.category === "movies" ? "movie" : "tv";
 
     const { data } = useQuery({
-        queryKey: [movie.id, movie.category],
-        queryFn: () => getDetailMovie(movie.category, movie.id),
+        queryKey: [movie.id, category],
+        queryFn: () => getDetailMovie(category, movie.id),
     });
 
     const { data: credits } = useQuery({
-        queryKey: [movie.id, movie.category, 'credits'],
-        queryFn: () => getDetailMovieCredit(movie.category, movie.id),
+        queryKey: [movie.id, category, 'credits'],
+        queryFn: () => getDetailMovieCredit(category, movie.id),
     });
 
     const { data: getVideos } = useQuery({
-        queryKey: [movie.id, movie.category, 'getVideos'],
-        queryFn: () => getDetailMovieGetVideo(movie.category, movie.id),
+        queryKey: [movie.id, category, 'getVideos'],
+        queryFn: () => getDetailMovieGetVideo(category, movie.id),
 
     });
 
     const { data: similar } = useQuery({
-        queryKey: [movie.category, movie.id, "similar"],
-        queryFn: () => getDetailMovieSimilar(movie.category, movie.id),
+        queryKey: [category, movie.id, "similar"],
+        queryFn: () => getDetailMovieSimilar(category, movie.id),
 
     });
 

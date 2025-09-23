@@ -1,13 +1,9 @@
 import Link from "next/link";
 
-export default function CardMovie({ data, category }: { data: any, category?: string }) {
-
-    if (category === 'movie') category = 'movies'
-    if (category === 'tv') category = 'tvseries'
-    const type = data.media_type || category;
+export default function CardMovie({ data }: { data: any }) {
 
     return (
-        <Link href={`/${type}/${data.id}`}
+        <Link href={`/${data.media_type}/${data.id}`}
             className="group">
             <div className="relative rounded-xl overflow-hidden cursor-pointer">
                 <img

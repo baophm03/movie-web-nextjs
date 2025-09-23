@@ -1,13 +1,31 @@
-"use client";
+"use client"
 
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { getPopularMovie, getTrendingMovie, getTopMovie, getSearch } from "@/services/api";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { getTrendingTV, getSearch, getPopularTV, getTopTV, getTrendingMovie, getPopularMovie, getTopMovie } from "@/services/api";
 import CardMovie from "@/components/CardMovie";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import page from "../page";
+import ErrorPage from "@/app/error";
+import React from "react";
 
-export default function Movies() {
+export default function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+    const { category } = React.use(params);
+
+    let key: string | undefined;
+    let keysearch: string = "";
+    let keyrouter: string = "";
+
+    if (category === "tvseries") {
+        key = "TV Series";
+        keysearch = "tv";
+        keyrouter = "tvseries";
+    } else if (category === "movies") {
+        key = "Movies";
+        keysearch = "movies";
+        keyrouter = "movies";
+    } else {
+        return <ErrorPage />
+    }
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -24,13 +42,13 @@ export default function Movies() {
         hasNextPage,
         isFetchingNextPage,
     } = useInfiniteQuery({
-        queryKey: ["Movie", queryKey],
+        queryKey: [key, queryKey],
         initialPageParam: 1,
         queryFn: ({ pageParam = 1 }) => {
-            if (queryKey === "") return getPopularMovie(pageParam);
-            if (queryKey === "trending") return getTrendingMovie(pageParam);
-            if (queryKey === "top_rated") return getTopMovie(pageParam);
-            return getSearch("movie", queryKey, pageParam);
+            if (queryKey === "") return key === "TV Series" ? getPopularTV(pageParam) : getPopularMovie(pageParam);
+            if (queryKey === "trending") return key === "TV Series" ? getTrendingTV(pageParam) : getTrendingMovie(pageParam);
+            if (queryKey === "top_rated") return key === "TV Series" ? getTopTV(pageParam) : getTopMovie(pageParam);
+            return getSearch(keysearch, queryKey, pageParam);
         },
         getNextPageParam: (lastPage) => {
             if (lastPage.page < lastPage.total_pages) {
@@ -40,10 +58,9 @@ export default function Movies() {
         },
     });
 
-
     const getAPI = async () => {
         if (!input) return
-        router.push(`/movies?keyword=${encodeURIComponent(input)}`);
+        router.push(`/${keyrouter}?keyword=${encodeURIComponent(input)}`);
     }
 
     useEffect(() => {
@@ -53,9 +70,8 @@ export default function Movies() {
     return (
         <div>
             <div className="bg-gradient-to-b from-white to-[#181818] w-full -z-10 ">
-                <h1 className="text-center text-3xl p-15 pt-35">Movies</h1>
+                <h1 className="text-center text-3xl p-15 pt-35">{key}</h1>
             </div>
-
             <div className="pl-10 pr-10 pb-10">
 
                 <div className="relative pt-10 pb-10 w-[35%]">
@@ -77,7 +93,7 @@ export default function Movies() {
                 <div className="grid grid-cols-6 gap-6 pb-10">
                     {data?.pages.flatMap((page, pageIndex) =>
                         page.results.map((movie: any) => (
-                            <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} category="movie" />
+                            <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} />
                         ))
                     )}
                 </div>
@@ -91,6 +107,6 @@ export default function Movies() {
                     )}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

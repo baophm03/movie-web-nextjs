@@ -5,7 +5,7 @@ import 'swiper/css';
 import { Autoplay } from "swiper/modules";
 import CardMovie from './CardMovie';
 
-export default function SliderCard({ data, category }: { data: any, category?: string }) {
+export default function SliderCard({ data }: { data: any }) {
     return (
         <Swiper
             modules={[Autoplay]}
@@ -14,9 +14,9 @@ export default function SliderCard({ data, category }: { data: any, category?: s
             autoplay={{ delay: 3000 }}
             loop={true}
         >
-            {data?.map((n: any) =>
-                <SwiperSlide key={n.id}>
-                    <CardMovie data={n} category={category} />
+            {data?.map((data: any) =>
+                <SwiperSlide key={data.id}>
+                    <CardMovie data={data} />
                 </SwiperSlide>
             )}
         </Swiper>
