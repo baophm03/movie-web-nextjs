@@ -21,7 +21,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
         keyrouter = "tvseries";
     } else if (category === "movies") {
         key = "Movies";
-        keysearch = "movies";
+        keysearch = "movie";
         keyrouter = "movies";
     } else {
         return <ErrorPage />
