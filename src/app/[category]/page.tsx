@@ -93,7 +93,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
                 <div className="grid grid-cols-6 gap-6 pb-10">
                     {data?.pages.flatMap((page, pageIndex) =>
                         page.results.map((movie: any) => (
-                            <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} />
+                            <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} category={keysearch} />
                         ))
                     )}
                 </div>

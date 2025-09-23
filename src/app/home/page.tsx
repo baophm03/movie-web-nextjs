@@ -40,7 +40,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.trendingMovie?.results} />
+                    <SliderCard data={data?.trendingMovie?.results} category="movie" />
                 </div>
 
                 {/* Top Rated Movies */}
@@ -55,7 +55,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.topMovie?.results} />
+                    <SliderCard data={data?.topMovie?.results} category="movie" />
                 </div>
 
                 {/* Trending TV */}
@@ -70,7 +70,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.trendingTV?.results} />
+                    <SliderCard data={data?.trendingTV?.results} category="tv" />
                 </div>
 
 
@@ -86,7 +86,7 @@ export default function Home() {
                     </div>
 
                     {/* slider danh sach phim */}
-                    <SliderCard data={data?.topTV?.results} />
+                    <SliderCard data={data?.topTV?.results} category="tv" />
                 </div>
             </div >
         </div>

@@ -7,7 +7,10 @@ import { getDetailMovie, getDetailMovieCredit, getDetailMovieGetVideo, getDetail
 
 export default function MovieDetail({ movie }: { movie: { category: string; id: string } }) {
 
-    let category = movie.category === "movies" ? "movie" : "tv";
+    let category = movie.category;
+
+    if (category === 'tvseries') category = 'tv';
+    if (category === 'movies') category = 'movie';
 
     const { data } = useQuery({
         queryKey: [movie.id, category],
@@ -22,13 +25,11 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
     const { data: getVideos } = useQuery({
         queryKey: [movie.id, category, 'getVideos'],
         queryFn: () => getDetailMovieGetVideo(category, movie.id),
-
     });
 
     const { data: similar } = useQuery({
-        queryKey: [category, movie.id, "similar"],
+        queryKey: [movie.id, category, "similar"],
         queryFn: () => getDetailMovieSimilar(category, movie.id),
-
     });
 
     return (
@@ -86,7 +87,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                                 {credits?.cast?.slice(0, 5).map((item: any) => {
                                     return (
                                         <div className="w-28 px-2 relative px-2" key={item.id}>
-                                            <div className="relative w-full   ">
+                                            <div className="relative w-full">
                                                 <Image
                                                     src={
                                                         item.profile_path
@@ -142,10 +143,9 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
             <div className="pr-10 pl-10 ">
                 <h3 className="text-base md:text-2xl">Similar</h3>
                 <div className="pt-5 pb-20">
-                    <SliderCard data={similar?.results} category={movie.category} />
+                    <SliderCard data={similar?.results} category={category} />
                 </div>
             </div>
-
         </div >
     );
 } 
