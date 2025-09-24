@@ -7,9 +7,19 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ErrorPage from "@/app/error";
 import React from "react";
+import { Movie } from "@/types/data";
 
 export default function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
     const { category } = React.use(params);
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const search = searchParams.get("keyword") || "";
+    const type = searchParams.get("type") || "";
+    const queryKey = search || type;
+
+    const [input, setInput] = useState(search);
 
     let key: string | undefined;
     let keysearch: string = "";
@@ -26,15 +36,6 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
     } else {
         return <ErrorPage />
     }
-
-    const router = useRouter();
-    const searchParams = useSearchParams();
-
-    const search = searchParams.get("keyword") || "";
-    const type = searchParams.get("type") || "";
-    const queryKey = search || type;
-
-    const [input, setInput] = useState(search);
 
     const {
         data,
@@ -92,7 +93,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
 
                 <div className="grid grid-cols-6 gap-6 pb-10">
                     {data?.pages.flatMap((page, pageIndex) =>
-                        page.results.map((movie: any) => (
+                        page.results.map((movie: Movie) => (
                             <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} category={keysearch} />
                         ))
                     )}

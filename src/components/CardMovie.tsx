@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { Movie } from "@/types/data";
 
-export default function CardMovie({ data, category }: { data: any, category: string }) {
+export default function CardMovie({ data, category }: { data: Movie, category: string }) {
 
     if (category === 'tv') category = 'tvseries';
     if (category === 'movie') category = 'movies';

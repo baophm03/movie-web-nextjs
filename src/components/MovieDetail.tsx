@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import SliderCard from "./SliderCard";
 import { getDetailMovie, getDetailMovieCredit, getDetailMovieGetVideo, getDetailMovieSimilar } from "@/services/api";
+import { Movie } from "@/types/data";
 
 export default function MovieDetail({ movie }: { movie: { category: string; id: string } }) {
 
@@ -68,7 +69,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                         </div>
 
                         <div className="flex items-center text-xs lg:text-sm gap-2 py-4 flex-wrap">
-                            {data?.genres?.map((item: any) => (
+                            {data?.genres?.map((item: Movie) => (
                                 <span key={item.id} className="bg-black-main px-4 py-1 border-2 border-white rounded-full text-white text-xs lg:text-sm">
                                     {item.name}
                                 </span>
@@ -84,7 +85,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                             <h3 className="text-white text-xl font-medium">Casts</h3>
 
                             <div className="flex  flex-wrap -mx-2 mt-1 ">
-                                {credits?.cast?.slice(0, 5).map((item: any) => {
+                                {credits?.cast?.slice(0, 5).map((item: Movie) => {
                                     return (
                                         <div className="w-28 px-2 relative px-2" key={item.id}>
                                             <div className="relative w-full">
@@ -112,7 +113,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
 
             {/* youtube */}
             <div className="w-full pr-10 pl-10">
-                {getVideos?.results?.slice(0, 3).map((item: any) => {
+                {getVideos?.results?.slice(0, 3).map((item: Movie) => {
                     return (
                         <div className="w-full mb-16 " key={item.id}>
                             <div className="w-full mb-4  ">

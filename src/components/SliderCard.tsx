@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay } from "swiper/modules";
 import CardMovie from './CardMovie';
+import { Movie } from '@/types/data';
 
-export default function SliderCard({ data, category }: { data: any, category: string }) {
+export default function SliderCard({ data, category }: { data: Movie[], category: string }) {
     return (
         <Swiper
             modules={[Autoplay]}
@@ -14,7 +15,7 @@ export default function SliderCard({ data, category }: { data: any, category: st
             autoplay={{ delay: 3000 }}
             loop={true}
         >
-            {data?.map((data: any) =>
+            {data?.map((data: Movie) =>
                 <SwiperSlide key={data.id}>
                     <CardMovie data={data} category={category} />
                 </SwiperSlide>

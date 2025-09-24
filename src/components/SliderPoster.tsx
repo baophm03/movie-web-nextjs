@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getTopMovie, getTopTV } from '@/services/api';
 import Link from 'next/link';
 import { Autoplay } from "swiper/modules";
+import { Movie } from '@/types/data';
 
 export default function SliderPoster() {
     const { data } = useQuery({
@@ -27,7 +28,7 @@ export default function SliderPoster() {
             autoplay={{ delay: 5000 }}
             loop={true}
         >
-            {data?.topMovie.results.map((n: any) => (
+            {data?.topMovie.results.map((n: Movie) => (
                 <SwiperSlide key={n.id}>
                     <div className='relative flex justify-center items-center'>
                         <Image
@@ -57,8 +58,7 @@ export default function SliderPoster() {
                         </div>
                     </div>
                 </SwiperSlide>
-            ))
-            }
+            ))}
         </Swiper >
     );
 }
