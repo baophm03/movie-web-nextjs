@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import path from "path";
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);

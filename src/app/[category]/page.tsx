@@ -2,7 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getTrendingTV, getSearch, getPopularTV, getTopTV, getTrendingMovie, getPopularMovie, getTopMovie } from "@/services/api";
-import CardMovie from "@/components/CardMovie";
+import CardMovie from "../../components/CardMovie";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ErrorPage from "@/app/error";
