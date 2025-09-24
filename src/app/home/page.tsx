@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getTrendingMovie, getTopMovie, getTrendingTV, getTopTV } from "@/services/api";
-import SliderCard from "../../components/a";
+import SliderCard from "@/components/SliderCard";
 import SliderPoster from "@/components/SliderPoster";
 import Link from "next/link";
 

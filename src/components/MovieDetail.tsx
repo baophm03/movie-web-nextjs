@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import SliderCard from "./a";
+import SliderCard from "./SliderCard";
 import { getDetailMovie, getDetailMovieCredit, getDetailMovieGetVideo, getDetailMovieSimilar } from "@/services/api";
 
 export default function MovieDetail({ movie }: { movie: { category: string; id: string } }) {
