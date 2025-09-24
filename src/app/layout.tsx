@@ -4,6 +4,7 @@ import Providers from '@/providers/providers';
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main className="flex-grow">
           <Providers>{children}</Providers>
+          <SpeedInsights />
         </main>
         <Footer />
       </body>
