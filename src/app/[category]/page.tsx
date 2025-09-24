@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ErrorPage from "@/app/error";
 import React from "react";
-import { Movie } from "@/types/data";
+import { Movie } from "@/types/movie";
 
 export default function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
     const { category } = React.use(params);

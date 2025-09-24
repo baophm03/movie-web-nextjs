@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Movie } from "@/types/data";
+import { Movie } from "@/types/movie";
 
 export default function CardMovie({ data, category }: { data: Movie, category: string }) {
 

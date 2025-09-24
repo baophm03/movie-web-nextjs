@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getTopMovie, getTopTV } from '@/services/api';
 import Link from 'next/link';
 import { Autoplay } from "swiper/modules";
-import { Movie } from '@/types/data';
+import { Movie } from '@/types/movie';
 
 export default function SliderPoster() {
     const { data } = useQuery({

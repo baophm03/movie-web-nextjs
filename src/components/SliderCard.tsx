@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay } from "swiper/modules";
 import CardMovie from './CardMovie';
-import { Movie } from '@/types/data';
+import { Movie } from '@/types/movie';
 
 export default function SliderCard({ data, category }: { data: Movie[], category: string }) {
     return (

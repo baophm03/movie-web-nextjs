@@ -1,4 +1,5 @@
 'use client'
+import { Movie } from '@/types/movie';
 
 const API_KEY = '4f85134e0e3de33d9af45eb9596b5735';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -8,7 +9,7 @@ export async function getTrendingMovie(PageNumber: number) {
     const data = await res.json();
     return {
         ...data,
-        results: data.results.map((movie: any) => ({
+        results: data.results.map((movie: Movie) => ({
             ...movie,
             media_type: 'movies',
         })),
@@ -20,7 +21,7 @@ export async function getTopMovie(PageNumber: number) {
     const data = await topMovie.json();
     return {
         ...data,
-        results: data.results.map((movie: any) => ({
+        results: data.results.map((movie: Movie) => ({
             ...movie,
             media_type: 'movies',
         })),
@@ -32,7 +33,7 @@ export async function getPopularMovie(PageNumber: number) {
     const data = await popularMovie.json();
     return {
         ...data,
-        results: data.results.map((movie: any) => ({
+        results: data.results.map((movie: Movie) => ({
             ...movie,
             media_type: 'movies',
         })),
@@ -44,7 +45,7 @@ export async function getTrendingTV(PageNumber: number) {
     const data = await trendingTV.json();
     return {
         ...data,
-        results: data.results.map((tv: any) => ({
+        results: data.results.map((tv: Movie) => ({
             ...tv,
             media_type: 'tvseries',
         })),
@@ -56,7 +57,7 @@ export async function getTopTV(PageNumber: number) {
     const data = await topTV.json();
     return {
         ...data,
-        results: data.results.map((tv: any) => ({
+        results: data.results.map((tv: Movie) => ({
             ...tv,
             media_type: 'tvseries',
         })),
@@ -68,7 +69,7 @@ export async function getPopularTV(PageNumber: number) {
     const data = await popularTV.json();
     return {
         ...data,
-        results: data.results.map((tv: any) => ({
+        results: data.results.map((tv: Movie) => ({
             ...tv,
             media_type: 'tvseries',
         })),
