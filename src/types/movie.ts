@@ -9,4 +9,8 @@ export interface Movie {
     genre_ids: number[];
     name?: string;
     profile_path?: string | null;
+    key?: string;
+    type?: string;
+    first_air_date?: string;
+    genres?: { id: number; name: string }[];
 }

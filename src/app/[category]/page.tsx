@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getTrendingTV, getSearch, getPopularTV, getTopTV, getTrendingMovie, getPopularMovie, getTopMovie } from "@/services/api";
@@ -14,7 +14,6 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
 
     const router = useRouter();
     const searchParams = useSearchParams();
-
     const search = searchParams.get("keyword") || "";
     const type = searchParams.get("type") || "";
     const queryKey = search || type;
@@ -33,8 +32,6 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
         key = "Movies";
         keysearch = "movie";
         keyrouter = "movies";
-    } else {
-        return <ErrorPage />
     }
 
     const {
@@ -51,7 +48,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
             if (queryKey === "top_rated") return key === "TV Series" ? getTopTV(pageParam) : getTopMovie(pageParam);
             return getSearch(keysearch, queryKey, pageParam);
         },
-        getNextPageParam: (lastPage) => {
+        getNextPageParam: (lastPage: any) => {
             if (lastPage.page < lastPage.total_pages) {
                 return lastPage.page + 1;
             }
@@ -67,6 +64,8 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
     useEffect(() => {
         setInput(search)
     }, [search])
+
+    if (key === "") return <ErrorPage />;
 
     return (
         <div>
