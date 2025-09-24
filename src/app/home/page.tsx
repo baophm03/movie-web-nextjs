@@ -2,11 +2,9 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getTrendingMovie, getTopMovie, getTrendingTV, getTopTV } from "@/services/api";
-import SliderCard from "@/components/SliderCard";
-import Image from "next/image";
-import SliderPoster from "@/components/SliderPoster";
+import SliderCard from "@/components/SliderCard.tsx";
+import SliderPoster from "@/components/SliderPoster.tsx";
 import Link from "next/link";
-import page from "../page";
 
 export default function Home() {
 
