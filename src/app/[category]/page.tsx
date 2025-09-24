@@ -48,7 +48,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
             if (queryKey === "top_rated") return key === "TV Series" ? getTopTV(pageParam) : getTopMovie(pageParam);
             return getSearch(keysearch, queryKey, pageParam);
         },
-        getNextPageParam: (lastPage: any) => {
+        getNextPageParam: (lastPage) => {
             if (lastPage.page < lastPage.total_pages) {
                 return lastPage.page + 1;
             }

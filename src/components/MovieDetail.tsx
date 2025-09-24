@@ -64,7 +64,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                     <div className="md:px-4 w-full -my-2">
                         <div className="py-4 w-full">
                             <h1 className="text-3xl lg:text-7xl font-bold ">
-                                {data?.title}
+                                {data?.title || data?.name}
                             </h1>
                         </div>
 
