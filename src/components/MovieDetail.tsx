@@ -5,6 +5,8 @@ import Image from "next/image";
 import SliderCard from "./SliderCard";
 import { getDetailMovie, getDetailMovieCredit, getDetailMovieGetVideo, getDetailMovieSimilar } from "@/services/api";
 import { Movie } from "@/types/movie";
+import { usePathname } from "next/navigation";
+import ErrorPage from "../app/error";
 
 export default function MovieDetail({ movie }: { movie: { category: string; id: string } }) {
 
@@ -12,6 +14,10 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
 
     if (category === 'tvseries') category = 'tv';
     if (category === 'movies') category = 'movie';
+
+    const pathname = usePathname();
+    const isTV = pathname.startsWith('/tvseries/');
+    const isMovie = pathname.startsWith('/movies/');
 
     const { data } = useQuery({
         queryKey: [movie.id, category],
@@ -32,6 +38,10 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
         queryKey: [movie.id, category, "similar"],
         queryFn: () => getDetailMovieSimilar(category, movie.id),
     });
+
+    if (!isTV && !isMovie) {
+        return <ErrorPage />;
+    }
 
     return (
         <div>
