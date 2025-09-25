@@ -43,9 +43,27 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
         queryKey: [key, queryKey],
         initialPageParam: 1,
         queryFn: ({ pageParam = 1 }) => {
-            if (queryKey === "") return key === "TV Series" ? getPopularTV(pageParam) : getPopularMovie(pageParam);
-            if (queryKey === "trending") return key === "TV Series" ? getTrendingTV(pageParam) : getTrendingMovie(pageParam);
-            if (queryKey === "top_rated") return key === "TV Series" ? getTopTV(pageParam) : getTopMovie(pageParam);
+            if (queryKey === "") {
+                if (key === "TV Series") {
+                    return getPopularTV(pageParam)
+                } else if (key === "Movies") {
+                    return getPopularMovie(pageParam)
+                };
+            };
+            if (queryKey === "trending") {
+                if (key === "TV Series") {
+                    return getTrendingTV(pageParam)
+                } else if (key === "Movies") {
+                    return getTrendingMovie(pageParam)
+                };
+            };
+            if (queryKey === "top_rated") {
+                if (key === "TV Series") {
+                    return getTopTV(pageParam)
+                } else if (key === "Movies") {
+                    return getTopMovie(pageParam)
+                };
+            };
             return getSearch(keysearch, queryKey, pageParam);
         },
         getNextPageParam: (lastPage) => {
@@ -57,7 +75,6 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
     });
 
     const getAPI = async () => {
-        if (!input) return
         router.push(`/${keyrouter}?keyword=${encodeURIComponent(input)}`);
     }
 
@@ -65,7 +82,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
         setInput(search)
     }, [search])
 
-    if (key === "") return <ErrorPage />;
+    if (key === undefined) return <ErrorPage />;
 
     return (
         <div>
@@ -92,9 +109,26 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
 
                 <div className="grid grid-cols-6 gap-6 pb-10">
                     {data?.pages.flatMap((page, pageIndex) =>
-                        page.results.map((movie: Movie) => (
-                            <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} category={keysearch} />
-                        ))
+                        page.results?.length === 0 ? (
+                            <div key={page.results} className="pt-20 pb-20 flex flex-col justify-center items-center text-white col-span-6 text-center text-2xl">
+                                <div className="mb-6">
+                                    <img src="/notfound.png" alt="Not Found" className="w-40 h-40 opacity-30" />
+                                </div>
+
+                                <p className="mt-2 mb-15 text-gray-400">
+                                    We couldn’t find any Movies or TV Shows matching your search.
+                                </p>
+
+                                <button className="text-xl bg-red-600 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]  rounded-3xl py-2 px-7 cursor-pointer"
+                                    onClick={() => router.push('/')}>
+                                    Return Home
+                                </button>
+                            </div>
+                        ) : (
+                            page.results?.map((movie: Movie) => (
+                                <CardMovie key={`${movie.id}-${pageIndex}`} data={movie} category={keysearch} />
+                            ))
+                        )
                     )}
                 </div>
 
