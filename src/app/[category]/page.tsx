@@ -91,7 +91,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
             </div>
             <div className="pl-10 pr-10 pb-10">
 
-                <div className="relative pt-10 pb-10 w-[35%]">
+                <div className="relative pt-10 pb-10 sm:w-[50%] lg:w-[45%] xl:w-[40%]">
                     <input
                         className="w-full text-white bg-black rounded-3xl p-2 pl-4"
                         type="text"
@@ -107,7 +107,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
                     </button>
                 </div>
 
-                <div className="grid grid-cols-6 gap-6 pb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 pb-10">
                     {data?.pages.flatMap((page, pageIndex) =>
                         page.results?.length === 0 ? (
                             <div key={page.results} className="pt-20 pb-20 flex flex-col justify-center items-center text-white col-span-6 text-center text-2xl">
