@@ -22,10 +22,10 @@ export default function Home() {
     });
 
     return (
-        <div >
+        <div>
             {/* SliderPoster */}
             <SliderPoster />
-            <div className="p-10">
+            <div className="pl-3 pr-3 md:pl-10 md:pr-10 pb-10">
                 {/* Trending Movies */}
                 <div>
                     <div className="flex flex-row justify-between pt-10 mb-10">

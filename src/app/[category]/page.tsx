@@ -86,11 +86,10 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
 
     return (
         <div>
-            <div className="bg-gradient-to-b from-white to-[#181818] w-full -z-10 ">
+            <div className="bg-gradient-to-b from-white to-[#181818] w-full z-10 ">
                 <h1 className="text-center text-3xl p-15 pt-35">{key}</h1>
             </div>
-            <div className="pl-10 pr-10 pb-10">
-
+            <div className="pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-7 md:pr-7 lg:pl-10 lg:pr-10 pb-10">
                 <div className="relative pt-10 pb-10 sm:w-[50%] lg:w-[45%] xl:w-[40%]">
                     <input
                         className="w-full text-white bg-black rounded-3xl p-2 pl-4"
@@ -107,7 +106,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
                     </button>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 pb-10">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-5 lg:gap-6 pb-10">
                     {data?.pages.flatMap((page, pageIndex) =>
                         page.results?.length === 0 ? (
                             <div key={page.results} className="pt-20 pb-20 flex flex-col justify-center items-center text-white col-span-6 text-center text-2xl">
