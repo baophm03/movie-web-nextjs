@@ -89,7 +89,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
             <div className="bg-gradient-to-b from-white to-[#181818] w-full z-10 ">
                 <h1 className="text-center text-3xl p-15 pt-35">{key}</h1>
             </div>
-            <div className="pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-7 md:pr-7 lg:pl-10 lg:pr-10 pb-10">
+            <div className="pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-7 md:pr-7 lg:pl-10 lg:pr-10 pb-15">
                 <div className="relative pt-10 pb-10 sm:w-[50%] lg:w-[45%] xl:w-[40%]">
                     <input
                         className="w-full text-white bg-black rounded-3xl p-2 pl-4"

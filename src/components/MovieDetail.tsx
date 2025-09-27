@@ -52,15 +52,16 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                         : `url(/fallback.png)`,
                 }}
                 className="
-                relative bg-center bg-cover bg-no-repeat w-full   
-                lg:px-16 md:py-32 py-12 px-4 before:content-[''] before:absolute 
-                before:w-full before:left-0 before:right-0  before:bottom-0 
-                before:h-1/2 before:bg-[var(--background)] before:bottom-0 
-                after:content-[''] after:absolute after:inset-0 after:w-full after:h-1/2 
-                after:bg-gradient-to-t after:from-[var(--background)] after:to-transparent"
+                    pb-10
+                    relative w-full bg-center bg-cover bg-no-repeat
+                    md:py-32 lg:px-16
+                    before:absolute before:inset-x-0 before:bottom-0 before:h-1/2 before:content-[''] before:bg-[var(--background)]
+                    after:absolute after:inset-0 after:h-1/2 after:content-[''] after:bg-gradient-to-t after:from-[var(--background)] after:to-transparent
+                "
             >
-                <div className="relative z-10 flex max-h-fit   ">
-                    <div className="z-50  px-4 mr-4 md:block hidden ">
+                <div className="relative z-10 flex max-h-fit pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-7 md:pr-7 lg:pl-10 lg:pr-10">
+                    {/* poster */}
+                    <div className="z-50 px-4 mr-4 md:block hidden ">
                         <img
                             src={`https://image.tmdb.org/t/p/original/${data?.poster_path}`}
                             alt="card Image"
@@ -71,13 +72,17 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                                 e.currentTarget.src = "/fallback.png";
                             }} />
                     </div>
+
+                    {/* information */}
                     <div className="md:px-4 w-full -my-2">
+                        {/* title */}
                         <div className="py-4 w-full">
                             <h1 className="text-3xl lg:text-7xl font-bold ">
                                 {data?.title || data?.name}
                             </h1>
                         </div>
 
+                        {/* genres */}
                         <div className="flex items-center text-xs lg:text-sm gap-2 py-4 flex-wrap">
                             {data?.genres?.map((item: Movie) => (
                                 <span key={item.id} className="bg-black-main px-4 py-1 border-2 border-white rounded-full text-white text-xs lg:text-sm">
@@ -86,6 +91,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                             ))}
                         </div>
 
+                        {/* overview */}
                         <div className="lg:py-4 py-2 text-xs md:text-sm lg:text-base">
                             {data?.overview}
                         </div>
@@ -93,8 +99,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                         {/* Cast */}
                         <div className="py-2 lg:py-4">
                             <h3 className="text-white text-xl font-medium">Casts</h3>
-
-                            <div className="flex  flex-wrap -mx-2 mt-1 ">
+                            <div className="flex flex-wrap -mx-2 mt-1 ">
                                 {credits?.cast?.slice(0, 5).map((item: Movie) => {
                                     return (
                                         <div className="w-28 px-2 relative px-2" key={item.id}>
@@ -110,53 +115,46 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                                                     height={144}
                                                 />
                                             </div>
-                                            <div className=" text-xs md:text-sm">{item.name}</div>
+                                            <div className="text-xs md:text-sm">{item.name}</div>
                                         </div>
                                     );
                                 })}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
-            {/* youtube */}
-            <div className="w-full pr-10 pl-10">
-                {getVideos?.results?.slice(0, 3).map((item: Movie) => {
-                    return (
-                        <div className="w-full mb-16 " key={item.id}>
-                            <div className="w-full mb-4  ">
-                                <h3 className="text-base md:text-2xl">{item.name}</h3>
+            <div className="pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-7 md:pr-7 lg:pl-10 lg:pr-10">
+                {/* youtube */}
+                <div className="w-full">
+                    {getVideos?.results?.slice(0, 3).map((item: Movie) => {
+                        return (
+                            <div key={item.id} className="pb-5">
+                                {/* title */}
+                                <div className="pt-3 pb-3">
+                                    <h3>{item.name}</h3>
+                                </div>
+                                {/* youtube video */}
+                                <div className="relative pb-[56.25%]">
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${item.key}`}
+                                        title="YouTube video"
+                                        className="absolute top-0 left-0 w-full h-full"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    />
+                                </div>
                             </div>
-                            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-                                <iframe
-                                    src={`https://www.youtube.com/embed/${item.key}`}
-                                    title="YouTube video"
-                                    style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        width: '100%',
-                                        height: '100%',
-                                    }}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                />
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+                        );
+                    })}
+                </div>
 
-            {/* similar */}
-            <div className="pr-10 pl-10 ">
-                <h3 className="text-base md:text-2xl">Similar</h3>
-                <div className="pt-5 pb-20">
+                {/* similar */}
+                <div className="pt-5 pb-15">
+                    <h3 className="pt-3 pb-3">Similar</h3>
                     <SliderCard data={similar?.results} category={category} />
                 </div>
             </div>
-        </div >
+        </div>
     );
 } 
