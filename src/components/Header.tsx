@@ -29,7 +29,7 @@ export default function Header() {
         <div className="fixed top-0 left-0 w-full z-50 font-bold">
             <div
                 id="navbar"
-                className={`flex items-center justify-between pl-10 pr-10 pt-5 pb-5 transition-colors duration-200 
+                className={`hidden md:flex items-center justify-between pl-10 pr-10 pt-5 pb-5 transition-colors duration-200
                 ${scrolled ? "bg-[#181818]" : "bg-transparent"}`}
             >
                 <Link className="flex items-center gap-4 text-3xl hover:text-red-600 cursor-pointer" href="/">
