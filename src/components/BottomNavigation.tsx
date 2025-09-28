@@ -12,7 +12,7 @@ export default function BottomNavigation() {
     ];
 
     return (
-        <div className="flex justify-around fixed bottom-0 left-0 right-0 z-50 bg-[#181818] p-4 md:hidden">
+        <div className="flex justify-around fixed bottom-0 left-0 right-0 z-50 bg-[#2a2929] p-4 md:hidden">
             {navItems.map((item) => {
                 const isActive =
                     item.href === "/"
