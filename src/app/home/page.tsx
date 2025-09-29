@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Home() {
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["Home"],
         queryFn: async () => {
             const [trendingMovie, topMovie, trendingTV, topTV] = await Promise.all([
@@ -36,9 +36,15 @@ export default function Home() {
                             <p>View more</p>
                         </Link>
                     </div>
-
-                    {/* slider danh sach phim */}
-                    <SliderCard data={data?.trendingMovie?.results} category="movie" />
+                    { /* slider danh sach phim */
+                        isLoading ? (
+                            Array.from({ length: 5 }).map((_, i) => (
+                                <SliderCard key={i} isLoading={isLoading} />
+                            ))
+                        ) : (
+                            <SliderCard data={data?.trendingMovie?.results} category="movie" isLoading={isLoading} />
+                        )
+                    }
                 </div>
 
                 {/* Top Rated Movies */}
@@ -51,9 +57,15 @@ export default function Home() {
                             <p>View more</p>
                         </Link>
                     </div>
-
-                    {/* slider danh sach phim */}
-                    <SliderCard data={data?.topMovie?.results} category="movie" />
+                    { /* slider danh sach phim */
+                        isLoading ? (
+                            Array.from({ length: 5 }).map((_, i) => (
+                                <SliderCard key={i} isLoading={isLoading} />
+                            ))
+                        ) : (
+                            <SliderCard data={data?.topMovie?.results} category="movie" isLoading={isLoading} />
+                        )
+                    }
                 </div>
 
                 {/* Trending TV */}
@@ -66,9 +78,15 @@ export default function Home() {
                             <p>View more</p>
                         </Link>
                     </div>
-
-                    {/* slider danh sach phim */}
-                    <SliderCard data={data?.trendingTV?.results} category="tv" />
+                    { /* slider danh sach phim */
+                        isLoading ? (
+                            Array.from({ length: 5 }).map((_, i) => (
+                                <SliderCard key={i} isLoading={isLoading} />
+                            ))
+                        ) : (
+                            <SliderCard data={data?.trendingTV?.results} category="tv" isLoading={isLoading} />
+                        )
+                    }
                 </div>
 
 
@@ -82,9 +100,15 @@ export default function Home() {
                             <p>View more</p>
                         </Link>
                     </div>
-
-                    {/* slider danh sach phim */}
-                    <SliderCard data={data?.topTV?.results} category="tv" />
+                    { /* slider danh sach phim */
+                        isLoading ? (
+                            Array.from({ length: 5 }).map((_, i) => (
+                                <SliderCard key={i} isLoading={isLoading} />
+                            ))
+                        ) : (
+                            <SliderCard data={data?.topTV?.results} category="tv" isLoading={isLoading} />
+                        )
+                    }
                 </div>
             </div >
         </div>

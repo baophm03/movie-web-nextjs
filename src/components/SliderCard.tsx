@@ -6,7 +6,7 @@ import { Autoplay } from "swiper/modules";
 import CardMovie from './CardMovie';
 import { Movie } from '@/types/movie';
 
-export default function SliderCard({ data, category }: { data: Movie[], category: string }) {
+export default function SliderCard({ data, category, isLoading }: { data?: Movie[], category?: string, isLoading?: boolean }) {
     return (
         <Swiper
             modules={[Autoplay]}
@@ -39,11 +39,17 @@ export default function SliderCard({ data, category }: { data: Movie[], category
                 }
             }
         >
-            {data?.map((data: Movie) =>
-                <SwiperSlide key={data.id}>
-                    <CardMovie data={data} category={category} />
-                </SwiperSlide>
-            )
+            {isLoading
+                ? Array.from({ length: 3 }).map((_, i) => (
+                    <SwiperSlide key={i} className="!w-auto">
+                        <CardMovie category={category} isLoading={true} />
+                    </SwiperSlide>
+                ))
+                : data?.map((movie: Movie) => (
+                    <SwiperSlide key={movie.id}>
+                        < CardMovie data={movie} category={category} isLoading={false} />
+                    </SwiperSlide>
+                ))
             }
         </Swiper >
     )
