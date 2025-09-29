@@ -3,9 +3,29 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Home, Film, Tv } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function BottomNavigation() {
     const pathname = usePathname();
+    const [show, setShow] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                setShow(false);
+            } else {
+                setShow(true);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
 
     const navItems = [
         { name: "Home", href: "/", icon: Home },
@@ -14,7 +34,12 @@ export default function BottomNavigation() {
     ];
 
     return (
-        <div className="flex justify-around fixed bottom-0 left-0 right-0 z-50 bg-[#181818] pb-[calc(8px+env(safe-area-inset-bottom))] pt-2 h-16 md:hidden">
+        <div
+            className={`flex justify-around fixed bottom-0 left-0 right-0 z-50 bg-[#181818] 
+        pb-[calc(8px+env(safe-area-inset-bottom))] pt-2 h-16 md:hidden 
+        transition-transform duration-300
+        ${show ? "translate-y-0" : "translate-y-full"}`}
+        >
             {navItems.map((item) => {
                 const isActive =
                     item.href === "/"
