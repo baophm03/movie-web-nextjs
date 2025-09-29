@@ -59,7 +59,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                     after:absolute after:inset-0 after:h-1/2 after:content-[''] after:bg-gradient-to-t after:from-[var(--background)] after:to-transparent
                 "
             >
-                <div className="relative z-10 flex max-h-fit pl-3 pr-3 sm:pl-5 sm:pr-5 md:pl-7 md:pr-7 lg:pl-10 lg:pr-10">
+                <div className="relative z-10 flex max-h-fit pl-3 pr-3 pt-10 md:pt-0 sm:pl-5 sm:pr-5 md:pl-7 md:pr-7 lg:pl-10 lg:pr-10">
                     {/* poster */}
                     <div className="z-50 px-4 mr-4 md:block hidden ">
                         <img
@@ -74,13 +74,11 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                     </div>
 
                     {/* information */}
-                    <div className="md:px-4 w-full -my-2">
+                    <div className="w-full">
                         {/* title */}
-                        <div className="py-4 w-full">
-                            <h1 className="text-5xl md:text-7xl font-bold ">
-                                {data?.title || data?.name}
-                            </h1>
-                        </div>
+                        <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold ">
+                            {data?.title || data?.name}
+                        </h1>
 
                         {/* genres */}
                         <div className="flex items-center text-xs lg:text-sm gap-2 py-4 flex-wrap">
@@ -92,30 +90,32 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                         </div>
 
                         {/* overview */}
-                        <div className="py-2 line-clamp-5 md:line-clamp-none md:text-2xl lg:py-4 lg:text-base">
+                        <div className="py-2 line-clamp-5 md:line-clamp-none text-xl lg:py-4">
                             {data?.overview}
                         </div>
 
                         {/* Cast */}
-                        <div className="py-2 lg:py-4 text-xl">
-                            <h3 className="text-white text-xl font-medium">Casts</h3>
-                            <div className="flex flex-wrap -mx-2 mt-1 ">
+                        <div className="py-2 lg:pt-4 text-xl">
+                            <h3 className="text-white text-xl font-medium pt-5 md:pt-0 pb-3">Casts</h3>
+
+                            <div className="flex flex-wrap">
                                 {credits?.cast?.slice(0, 5).map((item: Movie) => {
                                     return (
-                                        <div className="w-28 relative px-2" key={item.id}>
-                                            <div className="relative w-full">
+                                        <div className="relative w-25 md:30 lg:w-35 pr-5" key={item.id}>
+                                            <div className="relative">
                                                 <Image
                                                     src={
                                                         item.profile_path
                                                             ? `https://image.tmdb.org/t/p/original/${item.profile_path}`
                                                             : "/fallback.png"
-                                                    } alt="card Image"
-                                                    className="object-cover rounded-2xl"
-                                                    width={96}
-                                                    height={144}
+                                                    }
+                                                    alt="card Image"
+                                                    width={300}
+                                                    height={0}
+                                                    className="object-contain rounded-2xl"
                                                 />
                                             </div>
-                                            <div className="text-xs md:text-sm pt-3 pb-3">{item.name}</div>
+                                            <div className="text-xs md:text-sm pt-3 pb-5">{item.name}</div>
                                         </div>
                                     );
                                 })}
