@@ -59,11 +59,11 @@ export default function SliderPoster() {
                                 <div className="flex flex-row gap-3 justify-center md:justify-start lg:justify-start">
                                     <Link
                                         href={`/movies/${n.id}`}
-                                        className="font-bold text-[12px] lg:text-xl bg-red-600 cursor-pointer rounded-full py-2 lg:py-3 px-4 lg:px-8 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]"
+                                        className="font-bold text-[13px] lg:text-xl bg-red-600 cursor-pointer rounded-full py-2 lg:py-3 px-6 lg:px-8 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]"
                                     >
                                         Watch Now
                                     </Link>
-                                    <button className="font-bold text-[12px] lg:text-xl border border-white rounded-full py-2 lg:py-3 px-4 lg:px-8 hover:text-red-600 hover:bg-white">
+                                    <button className="font-bold text-[13px] lg:text-xl border border-white rounded-full py-2 lg:py-3 px-6 lg:px-8 hover:text-red-600 hover:bg-white">
                                         Watch Trailer
                                     </button>
                                 </div>

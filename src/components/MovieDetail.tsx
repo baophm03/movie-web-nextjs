@@ -96,7 +96,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
 
                         {/* Cast */}
                         <div className="py-2 lg:pt-4 text-xl">
-                            <h3 className="text-white text-xl font-medium pt-5 md:pt-0 pb-3">Casts</h3>
+                            <h3 className="font-bold text-white text-xl pt-5 md:pt-0 pb-3">Casts</h3>
 
                             <div className="flex flex-wrap">
                                 {credits?.cast?.slice(0, 5).map((item: Movie) => {
@@ -151,7 +151,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
 
                 {/* similar */}
                 <div className="pt-5 pb-15">
-                    <h3 className="pt-3 pb-3 text-xl">Similar</h3>
+                    <h3 className="pt-3 pb-3 text-xl font-bold">Similar</h3>
                     <SliderCard data={similar?.results} category={category} />
                 </div>
             </div>

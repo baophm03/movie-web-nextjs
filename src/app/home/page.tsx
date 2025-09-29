@@ -28,9 +28,9 @@ export default function Home() {
             <div className="pl-3 pr-3 md:pl-10 md:pr-10 pb-10">
                 {/* Trending Movies */}
                 <div>
-                    <div className="flex flex-row justify-between pt-10 mb-10">
+                    <div className="flex flex-row justify-between pt-10 pb-7">
                         <h1 className="text-2xl">Trending Movies</h1>
-                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                        <Link className="border border-white font-bold rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/movies?type=trending"}
                         >
                             <p>View more</p>
@@ -43,7 +43,7 @@ export default function Home() {
 
                 {/* Top Rated Movies */}
                 <div>
-                    <div className="flex flex-row justify-between pt-10 mb-10">
+                    <div className="flex flex-row justify-between pt-10 pb-7">
                         <h1 className="text-2xl">Top Rated Movies</h1>
                         <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/movies?type=top_rated"}
@@ -58,7 +58,7 @@ export default function Home() {
 
                 {/* Trending TV */}
                 <div>
-                    <div className="flex flex-row justify-between pt-10 mb-10">
+                    <div className="flex flex-row justify-between pt-10 pb-7">
                         <h1 className="text-2xl">Trending TV</h1>
                         <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/tvseries?type=trending"}
@@ -74,7 +74,7 @@ export default function Home() {
 
                 {/* Top Rated TV */}
                 <div >
-                    <div className="flex flex-row justify-between pt-10 mb-10">
+                    <div className="flex flex-row justify-between pt-10 pb-7">
                         <h1 className="text-2xl">Top Rated TV</h1>
                         <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/tvseries?type=top_rated"}

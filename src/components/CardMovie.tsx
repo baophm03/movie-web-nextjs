@@ -32,7 +32,7 @@ export default function CardMovie({ data, category }: { data: Movie, category: s
                     </svg>
                 </button>
             </div>
-            <div className='pt-5 group-hover:text-red-500'>{data.title || data.name}</div>
+            <div className='pt-3 pb-5 group-hover:text-red-500'>{data.title || data.name}</div>
         </Link>
     )
 }
