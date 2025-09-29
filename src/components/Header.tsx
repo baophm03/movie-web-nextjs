@@ -52,7 +52,7 @@ export default function Header() {
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`${isActive ? "text-red-600 border-b-2" : "text-white"} hover:text-red-600 hover:border-b-2`}
+                                className={`${isActive ? "text-red-600 border-b-2" : "text-white"} hover:text-red-600 hover:border-b-2 font-bold`}
                             >
                                 {item.name}
                             </Link>

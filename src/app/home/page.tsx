@@ -29,7 +29,7 @@ export default function Home() {
                 {/* Trending Movies */}
                 <div>
                     <div className="flex flex-row justify-between pt-10 pb-7">
-                        <h1 className="text-2xl">Trending Movies</h1>
+                        <h1 className="text-2xl font-bold">Trending Movies</h1>
                         <Link className="border border-white font-bold rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/movies?type=trending"}
                         >
@@ -44,7 +44,7 @@ export default function Home() {
                 {/* Top Rated Movies */}
                 <div>
                     <div className="flex flex-row justify-between pt-10 pb-7">
-                        <h1 className="text-2xl">Top Rated Movies</h1>
+                        <h1 className="text-2xl font-bold">Top Rated Movies</h1>
                         <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/movies?type=top_rated"}
                         >
@@ -59,7 +59,7 @@ export default function Home() {
                 {/* Trending TV */}
                 <div>
                     <div className="flex flex-row justify-between pt-10 pb-7">
-                        <h1 className="text-2xl">Trending TV</h1>
+                        <h1 className="text-2xl font-bold">Trending TV</h1>
                         <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/tvseries?type=trending"}
                         >
@@ -75,7 +75,7 @@ export default function Home() {
                 {/* Top Rated TV */}
                 <div >
                     <div className="flex flex-row justify-between pt-10 pb-7">
-                        <h1 className="text-2xl">Top Rated TV</h1>
+                        <h1 className="text-2xl font-bold">Top Rated TV</h1>
                         <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/tvseries?type=top_rated"}
                         >
