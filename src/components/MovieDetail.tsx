@@ -77,7 +77,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                     <div className="md:px-4 w-full -my-2">
                         {/* title */}
                         <div className="py-4 w-full">
-                            <h1 className="text-3xl lg:text-7xl font-bold ">
+                            <h1 className="text-5xl md:text-7xl font-bold ">
                                 {data?.title || data?.name}
                             </h1>
                         </div>
@@ -85,24 +85,24 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                         {/* genres */}
                         <div className="flex items-center text-xs lg:text-sm gap-2 py-4 flex-wrap">
                             {data?.genres?.map((item: Movie) => (
-                                <span key={item.id} className="bg-black-main px-4 py-1 border-2 border-white rounded-full text-white text-xs lg:text-sm">
+                                <span key={item.id} className="bg-black md:bg-opacity-70 px-4 py-1 border-2 border-white rounded-full text-white text-xs lg:text-sm">
                                     {item.name}
                                 </span>
                             ))}
                         </div>
 
                         {/* overview */}
-                        <div className="lg:py-4 py-2 text-xs md:text-sm lg:text-base">
+                        <div className="py-2 line-clamp-5 md:line-clamp-none md:text-2xl lg:py-4 lg:text-base">
                             {data?.overview}
                         </div>
 
                         {/* Cast */}
-                        <div className="py-2 lg:py-4">
+                        <div className="py-2 lg:py-4 text-xl">
                             <h3 className="text-white text-xl font-medium">Casts</h3>
                             <div className="flex flex-wrap -mx-2 mt-1 ">
                                 {credits?.cast?.slice(0, 5).map((item: Movie) => {
                                     return (
-                                        <div className="w-28 px-2 relative px-2" key={item.id}>
+                                        <div className="w-28 relative px-2" key={item.id}>
                                             <div className="relative w-full">
                                                 <Image
                                                     src={
@@ -115,7 +115,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                                                     height={144}
                                                 />
                                             </div>
-                                            <div className="text-xs md:text-sm">{item.name}</div>
+                                            <div className="text-xs md:text-sm pt-3 pb-3">{item.name}</div>
                                         </div>
                                     );
                                 })}
@@ -131,7 +131,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                         return (
                             <div key={item.id} className="pb-5">
                                 {/* title */}
-                                <div className="pt-3 pb-3">
+                                <div className="pt-3 pb-3 text-xl">
                                     <h3>{item.name}</h3>
                                 </div>
                                 {/* youtube video */}
@@ -151,7 +151,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
 
                 {/* similar */}
                 <div className="pt-5 pb-15">
-                    <h3 className="pt-3 pb-3">Similar</h3>
+                    <h3 className="pt-3 pb-3 text-xl">Similar</h3>
                     <SliderCard data={similar?.results} category={category} />
                 </div>
             </div>
