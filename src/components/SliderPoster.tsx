@@ -23,42 +23,55 @@ export default function SliderPoster() {
     return (
         <Swiper
             modules={[Autoplay]}
-            spaceBetween={50}
+            spaceBetween={0}
             slidesPerView={1}
             autoplay={{ delay: 5000 }}
             loop={true}
         >
             {data?.topMovie.results.map((n: Movie) => (
                 <SwiperSlide key={n.id}>
-                    <div className='relative flex justify-center items-center'>
+                    <div className="relative w-full min-h-[100dvh]">
+                        {/* Background */}
                         <Image
                             src={`https://image.tmdb.org/t/p/original${n.backdrop_path}`}
                             alt={n.title}
-                            width={1000}
-                            height={100}
-                            className='h-full w-full opacity-30'
+                            fill
+                            className="object-cover h-full w-auto opacity-30"
                             priority
                         />
-                        <div className='absolute flex justify-center items-center gap-20'>
-                            <div className='w-[40%]'>
-                                <h2 className='text-5xl font-bold'>{n.title}</h2>
-                                <p className='pt-10 pb-10 text-xl'>{n.overview}</p>
-                                <div className='flex gap-3'>
-                                    <Link href={`/movies/${n.id}`} className='font-bold bg-red-600 cursor-pointer rounded-full py-3 px-6 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]'>Watch Now</Link>
-                                    <button className='font-bold border border-white rounded-full py-3 px-6 hover:text-red-600 hover:bg-white'>Watch Trailer</button>
-                                </div>
-                            </div>
-                            <Image
+
+                        {/* Content */}
+                        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:justify-around md:px-16 md:flex-row text-white">
+                            <img
                                 src={`https://image.tmdb.org/t/p/original${n.poster_path}`}
                                 alt={n.title}
-                                width={250}
-                                height={100}
-                                className='rounded-2xl object-cover h-auto w-auto'
+                                className="w-[150px] h-auto rounded-xl object-cover mb-6 md:mb-0 md:order-2 md:w-[350px]"
                             />
+
+                            {/* Text */}
+                            <div className="w-full md:w-2/3 text-center md:text-left">
+                                <h2 className="text-2xl md:text-8xl font-bold">{n.title}</h2>
+                                <p className="mt-10 mb-10 text-sm md:text-2xl line-clamp-4">
+                                    {n.overview}
+                                </p>
+                                <div className="flex flex-row gap-3 justify-center md:justify-start">
+                                    <Link
+                                        href={`/movies/${n.id}`}
+                                        className="font-bold md:text-xl bg-red-600 cursor-pointer rounded-full py-3 px-8 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]"
+                                    >
+                                        Watch Now
+                                    </Link>
+                                    <button className="font-bold md:text-xl border border-white rounded-full py-3 px-8 hover:text-red-600 hover:bg-white">
+                                        Watch Trailer
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </SwiperSlide>
-            ))}
+            ))
+            }
         </Swiper >
     );
+
 }
