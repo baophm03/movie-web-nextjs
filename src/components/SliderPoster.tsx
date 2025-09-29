@@ -41,27 +41,29 @@ export default function SliderPoster() {
                         />
 
                         {/* Content */}
-                        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:justify-around md:px-16 md:flex-row text-white">
+                        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:justify-between md:pt-20 md:px-16 md:flex-row text-white">
+                            {/* image */}
                             <img
                                 src={`https://image.tmdb.org/t/p/original${n.poster_path}`}
                                 alt={n.title}
-                                className="w-[150px] h-auto rounded-xl object-cover mb-6 md:mb-0 md:order-2 md:w-[350px]"
+                                className="w-[150px] h-auto rounded-xl object-cover 
+                                mb-6 md:mb-0 md:order-2 md:w-[230px] xl:w-[350px]"
                             />
 
                             {/* Text */}
-                            <div className="w-full md:w-2/3 text-center md:text-left">
-                                <h2 className="text-2xl md:text-8xl font-bold">{n.title}</h2>
-                                <p className="mt-10 mb-10 text-sm md:text-2xl line-clamp-4">
+                            <div className="w-full text-center md:w-3/5 md:text-left lg:w-2/3 lg:text-left">
+                                <h2 className="text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-bold">{n.title}</h2>
+                                <p className="mt-10 mb-10 text-sm md:text-lg lg:text-xl xl:text-2xl line-clamp-4">
                                     {n.overview}
                                 </p>
-                                <div className="flex flex-row gap-3 justify-center md:justify-start">
+                                <div className="flex flex-row gap-3 justify-center md:justify-start lg:justify-start">
                                     <Link
                                         href={`/movies/${n.id}`}
-                                        className="font-bold md:text-xl bg-red-600 cursor-pointer rounded-full py-3 px-8 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]"
+                                        className="font-bold text-[12px] lg:text-xl bg-red-600 cursor-pointer rounded-full py-2 lg:py-3 px-4 lg:px-8 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]"
                                     >
                                         Watch Now
                                     </Link>
-                                    <button className="font-bold md:text-xl border border-white rounded-full py-3 px-8 hover:text-red-600 hover:bg-white">
+                                    <button className="font-bold text-[12px] lg:text-xl border border-white rounded-full py-2 lg:py-3 px-4 lg:px-8 hover:text-red-600 hover:bg-white">
                                         Watch Trailer
                                     </button>
                                 </div>
