@@ -45,7 +45,7 @@ export default function Home() {
                 <div>
                     <div className="flex flex-row justify-between pt-10 pb-7">
                         <h1 className="text-2xl font-bold">Top Rated Movies</h1>
-                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                        <Link className="border font-bold border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/movies?type=top_rated"}
                         >
                             <p>View more</p>
@@ -60,7 +60,7 @@ export default function Home() {
                 <div>
                     <div className="flex flex-row justify-between pt-10 pb-7">
                         <h1 className="text-2xl font-bold">Trending TV</h1>
-                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                        <Link className="border font-bold border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/tvseries?type=trending"}
                         >
                             <p>View more</p>
@@ -76,7 +76,7 @@ export default function Home() {
                 <div >
                     <div className="flex flex-row justify-between pt-10 pb-7">
                         <h1 className="text-2xl font-bold">Top Rated TV</h1>
-                        <Link className="border border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
+                        <Link className="border font-bold border-white rounded-2xl pl-4 pr-4 flex items-center hover:bg-white hover:text-red-500"
                             href={"/tvseries?type=top_rated"}
                         >
                             <p>View more</p>
