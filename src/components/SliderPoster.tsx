@@ -53,9 +53,12 @@ export default function SliderPoster() {
                             {/* Text */}
                             <div className="w-full text-center md:w-3/5 md:text-left lg:w-2/3 lg:text-left">
                                 <h2 className="text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-bold">{n.title}</h2>
-                                <p className="mt-10 mb-10 text-sm md:text-lg lg:text-xl xl:text-2xl line-clamp-4">
+
+                                <p className="text-justify mt-10 mb-10 text-sm md:text-lg lg:text-xl xl:text-2xl line-clamp-4">
                                     {n.overview}
                                 </p>
+
+                                {/* button */}
                                 <div className="flex flex-row gap-3 justify-center md:justify-start lg:justify-start">
                                     <Link
                                         href={`/movies/${n.id}`}
@@ -63,6 +66,7 @@ export default function SliderPoster() {
                                     >
                                         Watch Now
                                     </Link>
+
                                     <button className="font-bold text-[13px] lg:text-xl border border-white rounded-full py-2 lg:py-3 px-6 lg:px-8 hover:text-red-600 hover:bg-white">
                                         Watch Trailer
                                     </button>

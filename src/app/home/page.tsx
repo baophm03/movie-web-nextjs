@@ -89,7 +89,6 @@ export default function Home() {
                     }
                 </div>
 
-
                 {/* Top Rated TV */}
                 <div >
                     <div className="flex flex-row justify-between pt-10 pb-7">
