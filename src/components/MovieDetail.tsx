@@ -90,7 +90,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                         </div>
 
                         {/* overview */}
-                        <div className="py-2 line-clamp-5 md:line-clamp-none text-xl lg:py-4">
+                        <div className="text-justify my-2 line-clamp-5 md:line-clamp-none text-xl lg:my-4">
                             {data?.overview}
                         </div>
 
@@ -150,7 +150,7 @@ export default function MovieDetail({ movie }: { movie: { category: string; id: 
                 </div>
 
                 {/* similar */}
-                <div className="pt-5 pb-15">
+                <div className="pt-5">
                     <h3 className="pt-3 pb-3 text-xl font-bold">Similar</h3>
                     <SliderCard data={similar?.results} category={category} />
                 </div>
