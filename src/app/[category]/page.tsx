@@ -120,7 +120,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
                                         </div>
 
                                         <p className="mt-2 mb-15 text-gray-400">
-                                            We couldn't find any Movies or TV Shows matching your search.
+                                            {"We couldn't find any Movies or TV Shows matching your search."}
                                         </p>
 
                                         <button className="text-xl bg-red-600 shadow-[1px_1px_15px_3px_rgba(255,0,0,0.7)] hover:shadow-[1px_1px_20px_4px_rgba(255,0,0,1)]  rounded-3xl py-2 px-7 cursor-pointer"
