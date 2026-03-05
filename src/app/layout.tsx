@@ -23,14 +23,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      {/* Vercel Speed Insights and Analytics */}
-      <SpeedInsights />
-      <Analytics />
-
       <body className="flex flex-col min-h-screen">
         <main className="flex-grow">
           <Providers>{children}</Providers>
         </main>
+        {/* Vercel Speed Insights and Analytics */}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
