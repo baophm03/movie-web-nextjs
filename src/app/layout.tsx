@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Providers from '@/app/providers/providers';
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main className="flex-grow">
           <Providers>{children}</Providers>
         </main>
+
         {/* Vercel Speed Insights and Analytics */}
         <SpeedInsights />
         <Analytics />
